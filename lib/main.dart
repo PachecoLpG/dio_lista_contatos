@@ -95,13 +95,16 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     imgFile = await _picker.pickImage(source: ImageSource.camera);
-    croppedImg = await ImageCropper().cropImage(sourcePath: imgFile!.path);
+    croppedImg = await ImageCropper()
+        .cropImage(sourcePath: imgFile!.path, maxHeight: 1000, maxWidth: 1000);
     if (croppedImg == null) {
       return;
     }
+
     Directory appDocumentsDir = await getApplicationDocumentsDirectory();
-    imgPath = "${appDocumentsDir.path}/${croppedImg!.path}-${DateTime.now()}";
-    XFile temp = XFile(imgPath!);
+    XFile temp = XFile(croppedImg!.path);
+    imgPath =
+        '${appDocumentsDir.path}/${DateTime.now().millisecondsSinceEpoch}';
     await temp.saveTo(imgPath!);
   }
 
