@@ -49,6 +49,7 @@ class _ContatosPageState extends State<ContatosPage> {
             }
 
             return ListView.builder(
+                padding: const EdgeInsets.all(16),
                 shrinkWrap: true,
                 itemCount: box.length,
                 itemBuilder: (_, index) {
@@ -73,15 +74,18 @@ class _ContatoCard extends StatelessWidget {
         child: Row(
           children: <Widget>[
             CircleAvatar(
-              radius: 20,
-              child: Image.file(File(contato.imgPath!)),
+              radius: 30,
+              backgroundImage: Image.file(File(contato.imgPath!)).image,
             ),
-            const SizedBox(height: 16),
-            Column(children: <Widget>[
-              Text('Nome: ${contato.nome}'),
-              const SizedBox(height: 4),
-              Text('Nome: ${contato.telefone}'),
-            ]),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Nome: ${contato.nome}'),
+                const SizedBox(height: 4),
+                Text('Telefone: ${contato.telefone}'),
+              ],
+            ),
           ],
         ),
       ),
